@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { StatusBar } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-import { Container, Content, Header, HeaderText, List } from './styles';
+import { Container, Header, HeaderText, List } from './styles';
 import { colors } from '../../styles/variables';
 
 import AudioPreview, { AudioData } from '../../components/AudioPreview';
@@ -18,11 +19,13 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <Container>
-      <Content>
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fafafa" />
+
+      <Container>
         <Header>
           <HeaderText>Audio Player</HeaderText>
-          <Icon name="play-circle-outline" size={30} color={colors.main} />
+          <Icon name="play-circle" size={35} color={colors.main} />
         </Header>
 
         <List>
@@ -30,8 +33,8 @@ const Home: React.FC = () => {
             <AudioPreview audioData={audioData} key={audioData.id} />
           ))}
         </List>
-      </Content>
-    </Container>
+      </Container>
+    </>
   );
 };
 
