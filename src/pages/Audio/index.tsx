@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { colors } from '../../styles/variables';
 
+import { colors } from '../../styles/variables';
 import { AudioData } from '../../components/AudioPreview';
 import {
   Container,
@@ -13,7 +13,11 @@ import {
   ThumbImage,
   ThumbGradient,
   ControlsContainer,
-  StyledTouchableOpacity,
+  GoBackAndForwardButton,
+  GoBackIcon,
+  GoForwardIcon,
+  GoBackAndForwardButtonText,
+  CenterButton,
 } from './styles';
 
 interface Params {
@@ -33,6 +37,10 @@ const Audio: React.FC = () => {
     setIsPaused(false);
   }
 
+  function handleGoBack() {}
+
+  function handleGoForward() {}
+
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#222" />
@@ -47,18 +55,25 @@ const Audio: React.FC = () => {
         </TextContainer>
 
         <ControlsContainer>
-          <Icon name="play-back" size={35} color={colors.textWhite} />
+          <GoBackAndForwardButton onPress={handleGoBack}>
+            <GoBackIcon />
+            <GoBackAndForwardButtonText>30</GoBackAndForwardButtonText>
+          </GoBackAndForwardButton>
 
           {isPaused ? (
-            <StyledTouchableOpacity onPress={handlePlay}>
-              <Icon name="play" size={50} color={colors.textWhite} />
-            </StyledTouchableOpacity>
+            <CenterButton onPress={handlePlay}>
+              <Icon name="play" size={70} color={colors.textWhite} />
+            </CenterButton>
           ) : (
-            <StyledTouchableOpacity onPress={handlePause}>
-              <Icon name="pause" size={50} color={colors.textWhite} />
-            </StyledTouchableOpacity>
+            <CenterButton onPress={handlePause}>
+              <Icon name="pause" size={70} color={colors.textWhite} />
+            </CenterButton>
           )}
-          <Icon name="play-forward" size={35} color={colors.textWhite} />
+
+          <GoBackAndForwardButton onPress={handleGoForward}>
+            <GoForwardIcon />
+            <GoBackAndForwardButtonText>30</GoBackAndForwardButtonText>
+          </GoBackAndForwardButton>
         </ControlsContainer>
       </Container>
     </>

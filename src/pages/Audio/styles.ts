@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { colors } from '../../styles/variables';
 
@@ -36,18 +37,18 @@ export const TextContainer = styled.View`
   position: absolute;
   bottom: 200px;
   width: 100%;
-  text-align: center;
+  align-items: center;
 `;
 
 export const Title = styled.Text`
   color: ${colors.textWhite};
-  text-shadow: 0 0 10px black;
+  text-shadow: 0 0 5px black;
   font-size: 20px;
 `;
 
 export const Author = styled.Text`
-  color: ${colors.textWhite};
-  text-shadow: 0 0 10px black;
+  color: ${colors.textGray};
+  text-shadow: 0 0 5px black;
   font-size: 16px;
 `;
 
@@ -62,6 +63,34 @@ export const ControlsContainer = styled.View`
   height: 200px;
 `;
 
-export const StyledTouchableOpacity = styled(TouchableOpacity)`
+export const GoBackAndForwardButton = styled(TouchableOpacity)`
+  position: relative;
+`;
+
+export const GoBackIcon = styled(Icon).attrs({
+  name: 'refresh-outline',
+  size: 50,
+  color: colors.textWhite,
+})`
+  transform: scale(-1, 1);
+`;
+
+export const GoBackAndForwardButtonText = styled.Text`
+  color: ${colors.textWhite};
+  position: absolute;
+  font-size: 13px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 20px;
+`;
+
+export const CenterButton = styled(TouchableOpacity)`
   margin: 0 30px;
 `;
+
+export const GoForwardIcon = styled(Icon).attrs({
+  name: 'refresh-outline',
+  size: 50,
+  color: colors.textWhite,
+})``;
