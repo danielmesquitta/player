@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TrackPlayer from 'react-native-track-player';
 
 import { colors } from '../../styles/variables';
 import { AudioData } from '../../components/AudioPreview';
@@ -29,11 +30,31 @@ const Audio: React.FC = () => {
 
   const [isPaused, setIsPaused] = useState(false);
 
+  useEffect(() => {
+    async function createPlayer() {
+      const { id, audio_url: url, title, author: artist } = audioData;
+
+      await TrackPlayer.setupPlayer();
+
+      await TrackPlayer.add({
+        id: String(id),
+        url,
+        title,
+        artist,
+      });
+
+      TrackPlayer.play();
+    }
+    createPlayer();
+  }, [audioData]);
+
   function handlePause() {
+    TrackPlayer.pause();
     setIsPaused(true);
   }
 
   function handlePlay() {
+    TrackPlayer.play();
     setIsPaused(false);
   }
 
