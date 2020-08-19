@@ -36,7 +36,7 @@ export const TextContainer = styled.View`
   height: 150px;
   bottom: 0;
   left: 0;
-  padding: 20px;
+  padding: 0 70px 20px 30px;
 `;
 
 export const Title = styled.Text`
@@ -50,6 +50,22 @@ export const Author = styled.Text`
   color: ${colors.textGray};
 `;
 
-export const Description = styled.Text`
+export const Bottom = styled.View`
+  margin-top: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Tagline = styled.Text`
   color: ${colors.textWhite};
+  padding-right: 25px;
+`;
+
+export const IconContainer = styled.View`
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  border-radius: 32px;
 `;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, Content, Header, List } from './styles';
+import { Container, Content, Header, HeaderText, List } from './styles';
+import { colors } from '../../styles/variables';
 
 import AudioPreview, { AudioData } from '../../components/AudioPreview';
 
@@ -19,7 +20,10 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Content>
-        <Header> Audio Player</Header>
+        <Header>
+          <HeaderText>Audio Player</HeaderText>
+          <Icon name="play-circle-outline" size={30} color={colors.main} />
+        </Header>
 
         <List>
           {audioDataList.map(audioData => (

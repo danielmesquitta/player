@@ -2,5 +2,5 @@ export const colors = {
   text: '#222',
   main: 'steelblue',
   textWhite: '#fafafa',
-  textGray: '#eee',
+  textGray: '#ccc',
 };

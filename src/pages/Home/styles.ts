@@ -12,11 +12,18 @@ export const Content = styled.ScrollView`
   flex: 1;
 `;
 
-export const Header = styled.Text`
+export const Header = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+export const HeaderText = styled.Text`
   font-size: 30px;
   color: ${colors.main};
   text-align: center;
-  padding: 10px;
+  margin-right: 10px;
 `;
 
 export const List = styled(ScrollView).attrs({
