@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ScrollView } from 'react-native';
 
 import { Container, Content, Header, List } from './styles';
 
@@ -18,11 +19,11 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Content>
-        <Header>Player</Header>
+        <Header> Audio Player</Header>
 
         <List>
           {audioDataList.map(audioData => (
-            <AudioPreview audio={audioData} key={audioData.id} />
+            <AudioPreview audioData={audioData} key={audioData.id} />
           ))}
         </List>
       </Content>

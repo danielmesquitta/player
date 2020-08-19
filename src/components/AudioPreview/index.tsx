@@ -1,8 +1,16 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
 
-import { Container } from './styles';
+import {
+  Container,
+  ThumbImage,
+  BlackLinearGradient,
+  TextContainer,
+  Title,
+  Author,
+  Description,
+} from './styles';
 
 export interface AudioData {
   id: number;
@@ -18,19 +26,28 @@ export interface AudioData {
 }
 
 interface Props {
-  audio: AudioData;
+  audioData: AudioData;
 }
 
-const AudioList: React.FC<Props> = ({ audio }) => {
+const AudioList: React.FC<Props> = ({ audioData }) => {
   const navigation = useNavigation();
 
   function handlePress() {
-    navigation.navigate('Audio', { audio });
+    navigation.navigate('Audio', { audioData });
   }
 
   return (
-    <Container onPress={handlePress}>
-      <Text>Button text</Text>
+    <Container>
+      <RectButton onPress={handlePress} style={{ flex: 1 }}>
+        <ThumbImage source={{ uri: audioData.medium_image_url }} />
+        <BlackLinearGradient>
+          <TextContainer>
+            <Title>{audioData.title}</Title>
+            <Author>{audioData.author}</Author>
+            <Description>{audioData.tagline}</Description>
+          </TextContainer>
+        </BlackLinearGradient>
+      </RectButton>
     </Container>
   );
 };

@@ -7,17 +7,17 @@ import { AudioData } from '../../components/AudioPreview';
 interface Props {
   route: {
     params: {
-      audio: AudioData;
+      audioData: AudioData;
     };
   };
 }
 
 const Audio: React.FC<Props> = ({ route }) => {
-  const { audio } = route.params;
+  const { audioData } = route.params;
 
   useEffect(() => {
-    console.log(audio);
-  }, [audio]);
+    console.log(audioData);
+  }, [audioData]);
 
   return (
     <Container>

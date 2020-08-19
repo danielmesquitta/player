@@ -1,7 +1,11 @@
 import styled from 'styled-components/native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+import { colors } from '../../styles/variables';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
+  background: #fafafa;
 `;
 
 export const Content = styled.ScrollView`
@@ -10,9 +14,12 @@ export const Content = styled.ScrollView`
 
 export const Header = styled.Text`
   font-size: 30px;
+  color: ${colors.main};
   text-align: center;
   padding: 10px;
-  color: #222;
 `;
 
-export const List = styled.View``;
+export const List = styled(ScrollView).attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+})``;
