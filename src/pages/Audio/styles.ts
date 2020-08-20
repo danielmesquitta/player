@@ -22,17 +22,6 @@ export const ThumbImage = styled.Image.attrs({
   border-radius: 5px;
 `;
 
-export const ThumbGradient = styled(LinearGradient).attrs({
-  colors: ['#0045', '#000d'],
-})`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0007;
-`;
-
 export const TextContainer = styled.View`
   position: absolute;
   bottom: 200px;
@@ -44,12 +33,16 @@ export const Title = styled.Text`
   color: ${colors.textWhite};
   text-shadow: 0 0 5px black;
   font-size: 20px;
+  width: 280px;
+  text-align: center;
 `;
 
 export const Author = styled.Text`
   color: ${colors.textGray};
   text-shadow: 0 0 5px black;
   font-size: 16px;
+  width: 280px;
+  text-align: center;
 `;
 
 export const ControlsContainer = styled.View`

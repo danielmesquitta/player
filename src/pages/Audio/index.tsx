@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TrackPlayer from 'react-native-track-player';
 
 import { AudioData } from '../../components/AudioPreview';
+import ProgressBar from '../../components/ProgressBar';
+
 import { colors } from '../../styles/variables';
+import Background from '../../styles/Background';
 import {
   Container,
   TextContainer,
   Title,
   Author,
   ThumbImage,
-  ThumbGradient,
   ControlsContainer,
   GoBackAndForwardButton,
   GoBackIcon,
@@ -70,10 +71,8 @@ const Audio: React.FC = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#222" />
-
       <Container>
-        <ThumbGradient />
+        <Background />
         <ThumbImage source={{ uri: audioData.cover_image_url }} />
 
         <TextContainer>
@@ -82,7 +81,7 @@ const Audio: React.FC = () => {
         </TextContainer>
 
         <ControlsContainer>
-          {/* <ProgressBar duration={duration} position={position} /> */}
+          <ProgressBar />
           <GoBackAndForwardButton onPress={handleGoBack}>
             <GoBackIcon />
             <GoBackAndForwardButtonText>30</GoBackAndForwardButtonText>

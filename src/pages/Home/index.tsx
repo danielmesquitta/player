@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { Container, Header, HeaderText, List } from './styles';
+import { Container, ThumbGradient, Header, HeaderText, List } from './styles';
 import { colors } from '../../styles/variables';
+import Background from '../../styles/Background';
 
 import AudioPreview, { AudioData } from '../../components/AudioPreview';
 
@@ -19,22 +19,19 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" backgroundColor="#fafafa" />
+    <Container>
+      <Background />
+      <Header>
+        <HeaderText>Audio Player</HeaderText>
+        <Icon name="play-circle" size={35} color={colors.textWhite} />
+      </Header>
 
-      <Container>
-        <Header>
-          <HeaderText>Audio Player</HeaderText>
-          <Icon name="play-circle" size={35} color={colors.main} />
-        </Header>
-
-        <List>
-          {audioDataList.map(audioData => (
-            <AudioPreview audioData={audioData} key={audioData.id} />
-          ))}
-        </List>
-      </Container>
-    </>
+      <List>
+        {audioDataList.map(audioData => (
+          <AudioPreview audioData={audioData} key={audioData.id} />
+        ))}
+      </List>
+    </Container>
   );
 };
 

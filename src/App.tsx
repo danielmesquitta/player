@@ -1,14 +1,16 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, LogBox } from 'react-native';
 
 import Routes from './routes';
 
 const App: React.FC = () => {
+  LogBox.ignoreLogs(['No task registered', 'Require cycle']);
+
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#fafafa" />
+      <StatusBar barStyle="light-content" backgroundColor="#222" />
       <Routes />
     </>
   );
