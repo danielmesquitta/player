@@ -4,8 +4,8 @@ import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TrackPlayer from 'react-native-track-player';
 
-import { colors } from '../../styles/variables';
 import { AudioData } from '../../components/AudioPreview';
+import { colors } from '../../styles/variables';
 import {
   Container,
   TextContainer,
@@ -31,22 +31,19 @@ const Audio: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    async function createPlayer() {
+    (async () => {
       const { id, audio_url: url, title, author: artist } = audioData;
 
       await TrackPlayer.setupPlayer();
-
       await TrackPlayer.add({
         id: String(id),
         url,
         title,
         artist,
       });
-
       TrackPlayer.play();
-    }
-    createPlayer();
-  }, [audioData]);
+    })();
+  }, []);
 
   function handlePause() {
     TrackPlayer.pause();
@@ -58,9 +55,18 @@ const Audio: React.FC = () => {
     setIsPaused(false);
   }
 
-  function handleGoBack() {}
+  async function handleGoBack() {
+    const position = await TrackPlayer.getPosition();
+    const updatedPosition = position - 30 > 0 ? position - 30 : 0;
+    TrackPlayer.seekTo(updatedPosition);
+  }
 
-  function handleGoForward() {}
+  async function handleGoForward() {
+    const position = await TrackPlayer.getPosition();
+    const duration = await TrackPlayer.getDuration();
+    const updatedPosition = position + 30 > duration ? duration : position + 30;
+    TrackPlayer.seekTo(updatedPosition);
+  }
 
   return (
     <>
@@ -76,6 +82,7 @@ const Audio: React.FC = () => {
         </TextContainer>
 
         <ControlsContainer>
+          {/* <ProgressBar duration={duration} position={position} /> */}
           <GoBackAndForwardButton onPress={handleGoBack}>
             <GoBackIcon />
             <GoBackAndForwardButtonText>30</GoBackAndForwardButtonText>
