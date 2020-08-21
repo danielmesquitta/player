@@ -27,7 +27,7 @@ const Home: React.FC = () => {
     <Container>
       <Background />
       <Header>
-        <HeaderText>Audio Player</HeaderText>
+        <HeaderText>Player</HeaderText>
         <Icon name="play-circle" size={35} color={colors.textWhite} />
       </Header>
 
