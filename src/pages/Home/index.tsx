@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { Container, ThumbGradient, Header, HeaderText, List } from './styles';
+import { Container, Header, HeaderText, List } from './styles';
 import { colors } from '../../styles/variables';
 import Background from '../../styles/Background';
 
@@ -11,11 +12,15 @@ import api from '../../services/api';
 
 const Home: React.FC = () => {
   const [audioDataList, setAudioDataList] = useState<AudioData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/').then(response => {
-      setAudioDataList(response.data.data);
-    });
+    api
+      .get('/')
+      .then(response => {
+        setAudioDataList(response.data.data);
+      })
+      .then(() => setLoading(false));
   }, []);
 
   return (
@@ -26,11 +31,15 @@ const Home: React.FC = () => {
         <Icon name="play-circle" size={35} color={colors.textWhite} />
       </Header>
 
-      <List>
-        {audioDataList.map(audioData => (
-          <AudioPreview audioData={audioData} key={audioData.id} />
-        ))}
-      </List>
+      {loading ? (
+        <ActivityIndicator color="#fafafa" size={70} />
+      ) : (
+        <List>
+          {audioDataList.map(audioData => (
+            <AudioPreview audioData={audioData} key={audioData.id} />
+          ))}
+        </List>
+      )}
     </Container>
   );
 };
