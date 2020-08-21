@@ -29,31 +29,44 @@ interface Params {
 const Audio: React.FC = () => {
   const { audioData } = useRoute().params as Params;
 
-  const [isPaused, setIsPaused] = useState(false);
+  const [trackState, setTrackState] = useState<TrackPlayer.State>();
 
   useEffect(() => {
     (async () => {
-      const { id, audio_url: url, title, author: artist } = audioData;
+      const {
+        id,
+        audio_url: url,
+        title,
+        author: artist,
+        thumb_image_url: artwork,
+      } = audioData;
 
-      await TrackPlayer.setupPlayer();
       await TrackPlayer.add({
         id: String(id),
         url,
         title,
         artist,
+        artwork,
       });
+
       TrackPlayer.play();
     })();
   }, []);
 
-  function handlePause() {
-    TrackPlayer.pause();
-    setIsPaused(true);
+  useEffect(() => {
+    (async () => {
+      const updatedTrackState = await TrackPlayer.getState();
+      setTrackState(updatedTrackState);
+      console.log(updatedTrackState);
+    })();
+  }, [TrackPlayer.getState]);
+
+  async function handlePause() {
+    await TrackPlayer.pause();
   }
 
-  function handlePlay() {
-    TrackPlayer.play();
-    setIsPaused(false);
+  async function handlePlay() {
+    await TrackPlayer.play();
   }
 
   async function handleGoBack() {
@@ -87,7 +100,7 @@ const Audio: React.FC = () => {
             <GoBackAndForwardButtonText>30</GoBackAndForwardButtonText>
           </GoBackAndForwardButton>
 
-          {isPaused ? (
+          {trackState === 3 ? (
             <CenterButton onPress={handlePlay}>
               <Icon name="play" size={70} color={colors.textWhite} />
             </CenterButton>
