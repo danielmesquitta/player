@@ -13,6 +13,12 @@ An React Native app that lists audiobooks to be played, with a screen where you 
 - [Styled Components](https://styled-components.com/)
 - [Axios](https://github.com/axios/axios)
 
+<br/>
+  <p align="center">
+    <img src="docs/demo.gif" />
+  </p>
+<br/>
+
 ## GETTING STARTED
 ### Requirements
 
