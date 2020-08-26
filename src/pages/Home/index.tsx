@@ -63,11 +63,13 @@ const Home: React.FC = () => {
       {loading ? (
         <ActivityIndicator color="#fafafa" size={70} style={{ flex: 1 }} />
       ) : (
-        <List>
-          {filteredAudioDataList.map(audioData => (
-            <AudioPreview audioData={audioData} key={audioData.id} />
-          ))}
-        </List>
+        <List
+          data={filteredAudioDataList}
+          keyExtractor={audioData => String(audioData.id)}
+          renderItem={({ item: audioData }) => (
+            <AudioPreview audioData={audioData} />
+          )}
+        />
       )}
     </Container>
   );

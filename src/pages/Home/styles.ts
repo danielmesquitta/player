@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { colors } from '~/styles/variables';
+import AudioData from '~/@types/AudioData';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -59,9 +60,8 @@ export const Input = styled.TextInput`
   color: #bbb;
 `;
 
-export const List = styled(ScrollView).attrs({
+export const List = styled(FlatList as new () => FlatList<AudioData>).attrs({
   horizontal: true,
-  showsHorizontalScrollIndicator: false,
 })`
   flex: 1;
 `;
