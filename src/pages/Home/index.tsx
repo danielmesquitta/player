@@ -2,17 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { Container, Header, HeaderText, List } from './styles';
+import {
+  Container,
+  Header,
+  MainHeader,
+  HeaderText,
+  InputContainer,
+  Input,
+  List,
+} from './styles';
 import { colors } from '../../styles/variables';
 import Background from '../../styles/Background';
 
 import AudioPreview, { AudioData } from '../../components/AudioPreview';
+import searchForBooks from '../../utils/searchForBooks';
 
 import api from '../../services/api';
 
 const Home: React.FC = () => {
   const [audioDataList, setAudioDataList] = useState<AudioData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [filteredAudioDataList, setFilteredAudioDataList] = useState<
+    AudioData[]
+  >([]);
 
   useEffect(() => {
     api
@@ -23,19 +36,34 @@ const Home: React.FC = () => {
       .then(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    setFilteredAudioDataList(searchForBooks(search, audioDataList));
+  }, [search, audioDataList]);
+
   return (
     <Container>
       <Background />
       <Header>
-        <HeaderText>Player</HeaderText>
-        <Icon name="play-circle" size={35} color={colors.textWhite} />
+        <MainHeader>
+          <HeaderText>Player</HeaderText>
+          <Icon name="play-circle" size={35} color={colors.textWhite} />
+        </MainHeader>
+
+        <InputContainer>
+          <Icon name="search" color="#bbb" size={18} />
+          <Input
+            onChangeText={setSearch}
+            placeholder="Realizar busca..."
+            placeholderTextColor="#bbb"
+          />
+        </InputContainer>
       </Header>
 
       {loading ? (
-        <ActivityIndicator color="#fafafa" size={70} />
+        <ActivityIndicator color="#fafafa" size={70} style={{ flex: 1 }} />
       ) : (
         <List>
-          {audioDataList.map(audioData => (
+          {filteredAudioDataList.map(audioData => (
             <AudioPreview audioData={audioData} key={audioData.id} />
           ))}
         </List>

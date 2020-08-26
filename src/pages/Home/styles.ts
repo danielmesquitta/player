@@ -4,10 +4,10 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { colors } from '../../styles/variables';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   background: #fafafa;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 export const ThumbGradient = styled(LinearGradient).attrs({
@@ -21,19 +21,9 @@ export const ThumbGradient = styled(LinearGradient).attrs({
   background: #0007;
 `;
 
-export const Content = styled.ScrollView`
-  flex: 1;
-`;
-
 export const Header = styled.View`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
+  padding: 30px 0 10px;
 `;
 
 export const HeaderText = styled.Text`
@@ -43,9 +33,35 @@ export const HeaderText = styled.Text`
   margin-right: 10px;
 `;
 
+export const MainHeader = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+`;
+
+export const InputContainer = styled.SafeAreaView`
+  flex-direction: row;
+  align-items: center;
+  width: 85%;
+  border-radius: 4px;
+  margin: 0 auto 20px;
+  background: #0013;
+  padding-left: 20px;
+`;
+
+export const Input = styled.TextInput`
+  width: 100%;
+  font-size: 18px;
+  margin-left: 10px;
+  padding: 12px 20px 12px 0;
+  color: #bbb;
+`;
+
 export const List = styled(ScrollView).attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
 })`
-  flex-grow: 0;
+  flex: 1;
 `;
