@@ -1,4 +1,4 @@
-import { AudioData } from '~/components/AudioPreview';
+import AudioData from '~/@types/AudioData';
 
 export default function (search: string, books: AudioData[]) {
   const searchRegExp = new RegExp(search, 'i');

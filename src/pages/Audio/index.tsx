@@ -9,7 +9,7 @@ import TrackPlayer, {
   STATE_PLAYING,
 } from 'react-native-track-player';
 
-import { AudioData } from '~/components/AudioPreview';
+import AudioData from '~/@types/AudioData';
 import ProgressBar from '~/components/ProgressBar';
 
 import { colors } from '~/styles/variables';

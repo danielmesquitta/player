@@ -14,9 +14,10 @@ import {
 import { colors } from '~/styles/variables';
 import Background from '~/styles/Background';
 
-import AudioPreview, { AudioData } from '~/components/AudioPreview';
+import AudioPreview from '~/components/AudioPreview';
 import searchForBooks from '~/utils/searchForBooks';
 
+import AudioData from '~/@types/AudioData';
 import api from '~/services/api';
 
 const Home: React.FC = () => {
