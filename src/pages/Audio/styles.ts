@@ -1,9 +1,8 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { colors } from '../../styles/variables';
+import { colors } from '~/styles/variables';
 
 export const Container = styled.View`
   flex: 1;

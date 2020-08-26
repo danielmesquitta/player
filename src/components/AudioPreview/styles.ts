@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { colors } from '../../styles/variables';
+import { colors } from '~/styles/variables';
 
 export const BlackLinearGradient = styled(LinearGradient).attrs({
   colors: ['#0000', '#000f'],

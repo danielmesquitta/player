@@ -9,11 +9,11 @@ import TrackPlayer, {
   STATE_PLAYING,
 } from 'react-native-track-player';
 
-import { AudioData } from '../../components/AudioPreview';
-import ProgressBar from '../../components/ProgressBar';
+import { AudioData } from '~/components/AudioPreview';
+import ProgressBar from '~/components/ProgressBar';
 
-import { colors } from '../../styles/variables';
-import Background from '../../styles/Background';
+import { colors } from '~/styles/variables';
+import Background from '~/styles/Background';
 import {
   Container,
   TextContainer,

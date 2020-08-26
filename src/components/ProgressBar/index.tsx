@@ -1,8 +1,8 @@
 import React from 'react';
 import TrackPlayer, { ProgressComponent } from 'react-native-track-player';
-import convertSecondsToMinutes from '../../utils/convertSecondsToMinutes';
+import convertSecondsToMinutes from '~/utils/convertSecondsToMinutes';
 
-import { colors } from '../../styles/variables';
+import { colors } from '~/styles/variables';
 import { Container, Time, Bar } from './styles';
 
 class ProgressBar extends ProgressComponent {

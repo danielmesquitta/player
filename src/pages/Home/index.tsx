@@ -11,13 +11,13 @@ import {
   Input,
   List,
 } from './styles';
-import { colors } from '../../styles/variables';
-import Background from '../../styles/Background';
+import { colors } from '~/styles/variables';
+import Background from '~/styles/Background';
 
-import AudioPreview, { AudioData } from '../../components/AudioPreview';
-import searchForBooks from '../../utils/searchForBooks';
+import AudioPreview, { AudioData } from '~/components/AudioPreview';
+import searchForBooks from '~/utils/searchForBooks';
 
-import api from '../../services/api';
+import api from '~/services/api';
 
 const Home: React.FC = () => {
   const [audioDataList, setAudioDataList] = useState<AudioData[]>([]);

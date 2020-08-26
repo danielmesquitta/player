@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { colors } from '../../styles/variables';
+import { colors } from '~/styles/variables';
 
 import {
   Container,

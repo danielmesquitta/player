@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { colors } from '../../styles/variables';
+import { colors } from '~/styles/variables';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
