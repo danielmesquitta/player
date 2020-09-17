@@ -1,15 +1,12 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Background from '~/styles/Background';
 
 import { colors } from '~/styles/variables';
-import AudioData from '~/@types/AudioData';
+import { AudioData } from '~/@types/global';
 
-export const Container = styled.KeyboardAvoidingView`
-  flex: 1;
-  background: #fafafa;
-  justify-content: space-between;
-`;
+export const Container = styled(Background)``;
 
 export const ThumbGradient = styled(LinearGradient).attrs({
   colors: ['#0045', '#000d'],
@@ -42,7 +39,7 @@ export const MainHeader = styled.View`
   padding-bottom: 20px;
 `;
 
-export const InputContainer = styled.SafeAreaView`
+export const SearchContainer = styled.SafeAreaView`
   flex-direction: row;
   align-items: center;
   width: 85%;
@@ -52,12 +49,19 @@ export const InputContainer = styled.SafeAreaView`
   padding-left: 20px;
 `;
 
-export const Input = styled.TextInput`
+export const SearchInput = styled.TextInput`
   width: 100%;
   font-size: 18px;
   margin-left: 10px;
   padding: 12px 20px 12px 0;
   color: #bbb;
+`;
+
+export const Loading = styled.ActivityIndicator.attrs({
+  color: '#fafafa',
+  size: 70,
+})`
+  flex: 1;
 `;
 
 export const List = styled(FlatList as new () => FlatList<AudioData>).attrs({

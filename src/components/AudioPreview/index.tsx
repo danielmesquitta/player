@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { RectButton } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { colors } from '~/styles/variables';
-import AudioData from '~/@types/AudioData';
+import { AudioData } from '~/@types/global';
 
 import {
   Container,
@@ -22,7 +21,7 @@ interface Props {
   audioData: AudioData;
 }
 
-const AudioList: React.FC<Props> = ({ audioData }) => {
+const AudioPreview: React.FC<Props> = ({ audioData }) => {
   const navigation = useNavigation();
 
   function handlePress() {
@@ -30,27 +29,25 @@ const AudioList: React.FC<Props> = ({ audioData }) => {
   }
 
   return (
-    <Container>
-      <RectButton onPress={handlePress} style={{ flex: 1 }}>
-        <ThumbImage source={{ uri: audioData.medium_image_url }} />
+    <Container onPress={handlePress}>
+      <ThumbImage source={{ uri: audioData.medium_image_url }} />
 
-        <BlackLinearGradient>
-          <TextContainer>
-            <Title>{audioData.title}</Title>
-            <Author>by {audioData.author}</Author>
+      <BlackLinearGradient>
+        <TextContainer>
+          <Title>{audioData.title}</Title>
+          <Author>by {audioData.author}</Author>
 
-            <Bottom>
-              <Tagline>{audioData.tagline}</Tagline>
+          <Bottom>
+            <Tagline>{audioData.tagline}</Tagline>
 
-              <IconContainer>
-                <Icon name="play-arrow" size={40} color={colors.main} />
-              </IconContainer>
-            </Bottom>
-          </TextContainer>
-        </BlackLinearGradient>
-      </RectButton>
+            <IconContainer>
+              <Icon name="play-arrow" size={40} color={colors.main} />
+            </IconContainer>
+          </Bottom>
+        </TextContainer>
+      </BlackLinearGradient>
     </Container>
   );
 };
 
-export default AudioList;
+export default AudioPreview;

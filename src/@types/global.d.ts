@@ -1,4 +1,4 @@
-export default interface AudioData {
+export interface AudioData {
   id: number;
   title: string;
   tagline: string;

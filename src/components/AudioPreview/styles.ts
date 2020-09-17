@@ -1,22 +1,14 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { colors } from '~/styles/variables';
 
-export const BlackLinearGradient = styled(LinearGradient).attrs({
-  colors: ['#0000', '#000f'],
-})`
-  flex: 1;
-`;
-
-export const Container = styled.View`
+export const Container = styled(RectButton)`
   position: relative;
-  flex: 1;
   margin: 20px;
   height: 400px;
   width: 300px;
-  border-radius: 25px;
-  overflow: hidden;
 `;
 
 export const ThumbImage = styled.Image.attrs({
@@ -27,6 +19,14 @@ export const ThumbImage = styled.Image.attrs({
   top: 0;
   width: 100%;
   height: 100%;
+  border-radius: 25px;
+`;
+
+export const BlackLinearGradient = styled(LinearGradient).attrs({
+  colors: ['#0000', '#000f'],
+})`
+  flex: 1;
+  border-radius: 25px;
 `;
 
 export const TextContainer = styled.View`

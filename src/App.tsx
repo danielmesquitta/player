@@ -1,14 +1,14 @@
 import 'react-native-gesture-handler';
 
 import React, { useEffect } from 'react';
-import { StatusBar, LogBox } from 'react-native';
+import { StatusBar } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
+import { Provider } from 'react-redux';
 
 import Routes from './routes';
+import store from './store';
 
 const App: React.FC = () => {
-  LogBox.ignoreLogs(['Require cycle']);
-
   useEffect(() => {
     TrackPlayer.setupPlayer().then(() => {
       TrackPlayer.updateOptions({
@@ -25,10 +25,10 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <Provider store={store}>
       <StatusBar barStyle="light-content" backgroundColor="#222" />
       <Routes />
-    </>
+    </Provider>
   );
 };
 

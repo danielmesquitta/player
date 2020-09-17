@@ -9,11 +9,12 @@ import TrackPlayer, {
   STATE_PLAYING,
 } from 'react-native-track-player';
 
-import AudioData from '~/@types/AudioData';
+import { AudioData } from '~/@types/global';
+
 import ProgressBar from '~/components/ProgressBar';
+import GoBackAndForwardButton from '~/components/GoBackAndForwardButton';
 
 import { colors } from '~/styles/variables';
-import Background from '~/styles/Background';
 import {
   Container,
   TextContainer,
@@ -21,10 +22,6 @@ import {
   Author,
   ThumbImage,
   ControlsContainer,
-  GoBackAndForwardButton,
-  GoBackIcon,
-  GoForwardIcon,
-  GoBackAndForwardButtonText,
   CenterButton,
 } from './styles';
 
@@ -63,33 +60,33 @@ const Audio: React.FC = () => {
     });
   });
 
-  async function handlePause() {
-    await TrackPlayer.pause();
-    setTrackState(await TrackPlayer.getState());
-  }
+  async function handleCenterButtonPress() {
+    if (trackState === STATE_PAUSED) {
+      const { id } = audioData;
+      setTrackState(STATE_PLAYING);
 
-  async function handlePlay() {
-    const { id } = audioData;
-    setTrackState(STATE_PLAYING);
+      const track = await TrackPlayer.getTrack(String(id));
+      if (!track) {
+        const {
+          audio_url: url,
+          title,
+          author: artist,
+          thumb_image_url: artwork,
+        } = audioData;
 
-    const track = await TrackPlayer.getTrack(String(id));
-    if (!track) {
-      const {
-        audio_url: url,
-        title,
-        author: artist,
-        thumb_image_url: artwork,
-      } = audioData;
-
-      await TrackPlayer.add({
-        id: String(id),
-        url,
-        title,
-        artist,
-        artwork,
-      });
+        await TrackPlayer.add({
+          id: String(id),
+          url,
+          title,
+          artist,
+          artwork,
+        });
+      }
+      await TrackPlayer.play();
+    } else {
+      await TrackPlayer.pause();
+      setTrackState(await TrackPlayer.getState());
     }
-    await TrackPlayer.play();
   }
 
   async function handleGoBack() {
@@ -104,40 +101,27 @@ const Audio: React.FC = () => {
   }
 
   return (
-    <>
-      <Container>
-        <Background />
-        <ThumbImage source={{ uri: audioData.cover_image_url }} />
+    <Container>
+      <ThumbImage source={{ uri: audioData.cover_image_url }} />
 
-        <TextContainer>
-          <Title>{audioData.title}</Title>
-          <Author>by {audioData.author}</Author>
-        </TextContainer>
+      <TextContainer>
+        <Title>{audioData.title}</Title>
+        <Author>by {audioData.author}</Author>
+      </TextContainer>
 
-        <ControlsContainer>
-          <ProgressBar />
-          <GoBackAndForwardButton onPress={handleGoBack}>
-            <GoBackIcon />
-            <GoBackAndForwardButtonText>30</GoBackAndForwardButtonText>
-          </GoBackAndForwardButton>
-
-          {trackState === STATE_PAUSED ? (
-            <CenterButton onPress={handlePlay}>
-              <Icon name="play" size={70} color={colors.textWhite} />
-            </CenterButton>
-          ) : (
-            <CenterButton onPress={handlePause}>
-              <Icon name="pause" size={70} color={colors.textWhite} />
-            </CenterButton>
-          )}
-
-          <GoBackAndForwardButton onPress={handleGoForward}>
-            <GoForwardIcon />
-            <GoBackAndForwardButtonText>30</GoBackAndForwardButtonText>
-          </GoBackAndForwardButton>
-        </ControlsContainer>
-      </Container>
-    </>
+      <ControlsContainer>
+        <ProgressBar />
+        <GoBackAndForwardButton handlePress={handleGoBack} type="back" />
+        <CenterButton onPress={handleCenterButtonPress}>
+          <Icon
+            name={trackState === STATE_PAUSED ? 'play' : 'pause'}
+            size={70}
+            color={colors.textWhite}
+          />
+        </CenterButton>
+        <GoBackAndForwardButton handlePress={handleGoForward} type="forward" />
+      </ControlsContainer>
+    </Container>
   );
 };
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {
@@ -7,17 +6,17 @@ import {
   Header,
   MainHeader,
   HeaderText,
-  InputContainer,
-  Input,
+  SearchContainer,
+  SearchInput,
+  Loading,
   List,
 } from './styles';
 import { colors } from '~/styles/variables';
-import Background from '~/styles/Background';
 
 import AudioPreview from '~/components/AudioPreview';
 import searchForBooks from '~/utils/searchForBooks';
 
-import AudioData from '~/@types/AudioData';
+import { AudioData } from '~/@types/global';
 import api from '~/services/api';
 
 const Home: React.FC = () => {
@@ -43,25 +42,24 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <Background />
       <Header>
         <MainHeader>
           <HeaderText>Player</HeaderText>
           <Icon name="play-circle" size={35} color={colors.textWhite} />
         </MainHeader>
 
-        <InputContainer>
+        <SearchContainer>
           <Icon name="search" color="#bbb" size={18} />
-          <Input
+          <SearchInput
             onChangeText={setSearch}
             placeholder="Realizar busca..."
             placeholderTextColor="#bbb"
           />
-        </InputContainer>
+        </SearchContainer>
       </Header>
 
       {loading ? (
-        <ActivityIndicator color="#fafafa" size={70} style={{ flex: 1 }} />
+        <Loading />
       ) : (
         <List
           data={filteredAudioDataList}

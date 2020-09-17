@@ -1,20 +1,13 @@
 import styled from 'styled-components/native';
-import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import { colors } from '~/styles/variables';
+import Background from '~/styles/Background';
 
-export const Container = styled.View`
-  flex: 1;
-  position: relative;
-`;
+export const Container = styled(Background)``;
 
 export const ThumbImage = styled.Image.attrs({
   resizeMode: 'center',
 })`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   opacity: 0.5;
@@ -55,34 +48,6 @@ export const ControlsContainer = styled.View`
   height: 200px;
 `;
 
-export const GoBackAndForwardButton = styled(TouchableOpacity)`
-  position: relative;
-`;
-
-export const GoBackIcon = styled(Icon).attrs({
-  name: 'refresh-outline',
-  size: 50,
-  color: colors.textWhite,
-})`
-  transform: scale(-1, 1);
-`;
-
-export const GoBackAndForwardButtonText = styled.Text`
-  color: ${colors.textWhite};
-  position: absolute;
-  font-size: 13px;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  top: 20px;
-`;
-
-export const CenterButton = styled(TouchableOpacity)`
+export const CenterButton = styled.TouchableOpacity`
   margin: 0 30px;
 `;
-
-export const GoForwardIcon = styled(Icon).attrs({
-  name: 'refresh-outline',
-  size: 50,
-  color: colors.textWhite,
-})``;
