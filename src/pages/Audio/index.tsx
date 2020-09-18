@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { AppState } from 'react-native';
+import React, { useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TrackPlayer, {
-  State as TrackState,
-  STATE_NONE,
-  STATE_PAUSED,
-  STATE_PLAYING,
-} from 'react-native-track-player';
-
-import { AudioData } from '~/@types/global';
+import TrackPlayer from 'react-native-track-player';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ProgressBar from '~/components/ProgressBar';
 import GoBackAndForwardButton from '~/components/GoBackAndForwardButton';
@@ -25,14 +18,20 @@ import {
   CenterButton,
 } from './styles';
 
+import { AudioData } from '~/@types/global';
+import { IStore } from '~/@types/store';
+
+import { updatePlayerState } from '~/store/modules/player/actions';
+
 interface Params {
   audioData: AudioData;
 }
 
 const Audio: React.FC = () => {
-  const { audioData } = useRoute().params as Params;
+  const dispatch = useDispatch();
+  const { player } = useSelector<IStore, IStore>(state => state);
 
-  const [trackState, setTrackState] = useState<TrackState>(STATE_NONE);
+  const { audioData } = useRoute().params as Params;
 
   useEffect(() => {
     TrackPlayer.destroy();
@@ -52,40 +51,38 @@ const Audio: React.FC = () => {
       artist,
       artwork,
     }).then(() => TrackPlayer.play());
-  }, [audioData]);
 
-  useEffect(() => {
-    AppState.addEventListener('change', () => {
-      TrackPlayer.getState().then(state => setTrackState(state));
-    });
-  });
+    dispatch(updatePlayerState('playing'));
+  }, [audioData, dispatch]);
 
   async function handleCenterButtonPress() {
-    if (trackState === STATE_PAUSED) {
-      const { id } = audioData;
-      setTrackState(STATE_PLAYING);
+    switch (player) {
+      case 'playing':
+        await TrackPlayer.pause();
+        dispatch(updatePlayerState('paused'));
+        break;
 
-      const track = await TrackPlayer.getTrack(String(id));
-      if (!track) {
-        const {
-          audio_url: url,
-          title,
-          author: artist,
-          thumb_image_url: artwork,
-        } = audioData;
+      default:
+        const { id } = audioData;
+        const track = await TrackPlayer.getTrack(String(id));
+        if (!track) {
+          const {
+            audio_url: url,
+            title,
+            author: artist,
+            thumb_image_url: artwork,
+          } = audioData;
 
-        await TrackPlayer.add({
-          id: String(id),
-          url,
-          title,
-          artist,
-          artwork,
-        });
-      }
-      await TrackPlayer.play();
-    } else {
-      await TrackPlayer.pause();
-      setTrackState(await TrackPlayer.getState());
+          await TrackPlayer.add({
+            id: String(id),
+            url,
+            title,
+            artist,
+            artwork,
+          });
+        }
+        await TrackPlayer.play();
+        dispatch(updatePlayerState('playing'));
     }
   }
 
@@ -114,7 +111,7 @@ const Audio: React.FC = () => {
         <GoBackAndForwardButton handlePress={handleGoBack} type="back" />
         <CenterButton onPress={handleCenterButtonPress}>
           <Icon
-            name={trackState === STATE_PAUSED ? 'play' : 'pause'}
+            name={player === 'playing' ? 'pause' : 'play'}
             size={70}
             color={colors.textWhite}
           />

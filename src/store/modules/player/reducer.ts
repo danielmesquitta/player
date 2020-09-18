@@ -8,7 +8,7 @@ interface IAction {
   payload: IPlayerState;
 }
 
-const cart = produce((draft: IPlayerState, action: IAction) => {
+const player = produce((draft: IPlayerState, action: IAction) => {
   switch (action.type) {
     case '@player/UPDATE_STATE': {
       return (draft = action.payload);
@@ -16,4 +16,4 @@ const cart = produce((draft: IPlayerState, action: IAction) => {
   }
 }, INITIAL_STATE);
 
-export default cart;
+export default player;
