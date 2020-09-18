@@ -8,6 +8,8 @@ An React Native app that lists audiobooks to be played, with a screen where you 
 - [TypeScript](https://www.typescriptlang.org/)
 - [React Navigation](https://reactnavigation.org/)
 - [React Native Track Player](https://react-native-track-player.js.org/)
+- [Redux](https://redux.js.org/)
+- [Immer](https://immerjs.github.io/immer/docs/introduction)
 - [React Native Community Slider](https://github.com/react-native-community/react-native-slider)
 - [Vector Icons](https://github.com/oblador/react-native-vector-icons)
 - [Styled Components](https://styled-components.com/)
