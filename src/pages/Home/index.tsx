@@ -16,15 +16,15 @@ import { colors } from '~/styles/variables';
 import AudioPreview from '~/components/AudioPreview';
 import searchForBooks from '~/utils/searchForBooks';
 
-import { AudioData } from '~/@types/global';
+import { IAudioData } from '~/@types/global';
 import api from '~/services/api';
 
 const Home: React.FC = () => {
-  const [audioDataList, setAudioDataList] = useState<AudioData[]>([]);
+  const [audioDataList, setAudioDataList] = useState<IAudioData[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [filteredAudioDataList, setFilteredAudioDataList] = useState<
-    AudioData[]
+    IAudioData[]
   >([]);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-export interface AudioData {
+export interface IAudioData {
   id: number;
   title: string;
   tagline: string;

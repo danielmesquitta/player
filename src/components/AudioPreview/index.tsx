@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { colors } from '~/styles/variables';
-import { AudioData } from '~/@types/global';
+import { IAudioData } from '~/@types/global';
 
 import {
   Container,
@@ -17,11 +17,11 @@ import {
   IconContainer,
 } from './styles';
 
-interface Props {
-  audioData: AudioData;
+interface IProps {
+  audioData: IAudioData;
 }
 
-const AudioPreview: React.FC<Props> = ({ audioData }) => {
+const AudioPreview: React.FC<IProps> = ({ audioData }) => {
   const navigation = useNavigation();
 
   function handlePress() {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TrackPlayer from 'react-native-track-player';
@@ -18,24 +18,21 @@ import {
   CenterButton,
 } from './styles';
 
-import { AudioData } from '~/@types/global';
+import { IAudioData } from '~/@types/global';
 import { IStore } from '~/@types/store';
 
 import { updatePlayerState } from '~/store/modules/player/actions';
 
 interface Params {
-  audioData: AudioData;
+  audioData: IAudioData;
 }
 
 const Audio: React.FC = () => {
   const dispatch = useDispatch();
   const { player } = useSelector<IStore, IStore>(state => state);
-
   const { audioData } = useRoute().params as Params;
 
-  useEffect(() => {
-    TrackPlayer.destroy();
-
+  const track = useMemo(() => {
     const {
       id,
       audio_url: url,
@@ -43,17 +40,14 @@ const Audio: React.FC = () => {
       author: artist,
       thumb_image_url: artwork,
     } = audioData;
+    return { id: String(id), url, title, artist, artwork };
+  }, [audioData]);
 
-    TrackPlayer.add({
-      id: String(id),
-      url,
-      title,
-      artist,
-      artwork,
-    }).then(() => TrackPlayer.play());
-
+  useEffect(() => {
+    TrackPlayer.destroy();
+    TrackPlayer.add(track).then(() => TrackPlayer.play());
     dispatch(updatePlayerState('playing'));
-  }, [audioData, dispatch]);
+  }, [track, dispatch]);
 
   async function handleCenterButtonPress() {
     switch (player) {
@@ -63,23 +57,10 @@ const Audio: React.FC = () => {
         break;
 
       default:
-        const { id } = audioData;
-        const track = await TrackPlayer.getTrack(String(id));
-        if (!track) {
-          const {
-            audio_url: url,
-            title,
-            author: artist,
-            thumb_image_url: artwork,
-          } = audioData;
-
-          await TrackPlayer.add({
-            id: String(id),
-            url,
-            title,
-            artist,
-            artwork,
-          });
+        const { id } = track;
+        const trackExists = await TrackPlayer.getTrack(id);
+        if (!trackExists) {
+          await TrackPlayer.add(track);
         }
         await TrackPlayer.play();
         dispatch(updatePlayerState('playing'));

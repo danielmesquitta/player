@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Background from '~/styles/Background';
 
 import { colors } from '~/styles/variables';
-import { AudioData } from '~/@types/global';
+import { IAudioData } from '~/@types/global';
 
 export const Container = styled(Background)``;
 
@@ -64,7 +64,7 @@ export const Loading = styled.ActivityIndicator.attrs({
   flex: 1;
 `;
 
-export const List = styled(FlatList as new () => FlatList<AudioData>).attrs({
+export const List = styled(FlatList as new () => FlatList<IAudioData>).attrs({
   horizontal: true,
 })`
   flex: 1;
