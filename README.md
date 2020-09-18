@@ -1,6 +1,6 @@
 # Player
 
-An React Native app that lists audiobooks to be played, with a screen where you can control the playback, being able also to run and contol it in background mode.
+An React Native app that lists audiobooks to be played, with a screen where you can manage the playback, being able also to run and control it in background mode.  🎧
 
 ### Technologies
 
