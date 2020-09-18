@@ -22,7 +22,7 @@ import api from '~/services/api';
 const Home: React.FC = () => {
   const [audioDataList, setAudioDataList] = useState<IAudioData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [searchText, setSearchText] = useState('');
   const [filteredAudioDataList, setFilteredAudioDataList] = useState<
     IAudioData[]
   >([]);
@@ -37,8 +37,8 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setFilteredAudioDataList(searchForBooks(search, audioDataList));
-  }, [search, audioDataList]);
+    setFilteredAudioDataList(searchForBooks(searchText, audioDataList));
+  }, [searchText, audioDataList]);
 
   return (
     <Container>
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         <SearchContainer>
           <Icon name="search" color="#bbb" size={18} />
           <SearchInput
-            onChangeText={setSearch}
+            onChangeText={setSearchText}
             placeholder="Realizar busca..."
             placeholderTextColor="#bbb"
           />
